@@ -1,0 +1,43 @@
+<DOCTYPE! html>
+  <html>
+    <head>
+      <script src="bower_components/jquery/dist/jquery.js"></script> <!--install jquery-->
+      <script src="bower_components/jquery.cookie/jquery.cookie.js"></script> <!--install jquery cookie-->
+      <meta charset="UTF-8">
+      <meta title="Today sentence">
+      <meta http-equiv="default-style">
+      <meta name="description" content="Page with today sentence">
+      <meta name="author" content="Milosz Wojcik">
+      <meta name="generator" contnent="Atom">
+      <meta name="keywords" content="sentence, today, goodday">
+      <link rel="Stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+      <div id='display'></div>
+      <script>
+        var sentences = [ //giveing me storage of sentences
+        "Sentence 1",
+        "Sentence 2",
+        "Sentence 3",
+        "Sentence 4",
+        "Sentence 5"
+        ];
+        $(document).ready(function() { //doing function when document is ready
+          var currentNumber = $.cookie('currentNumber'); //cookie read
+          if (!currentNumber) { //if currentNumber isn't set that do this
+            $.cookie('currentNumber', 0, { expires: 10000 }); //giveing us current number of sentences
+            $.cookie('dontchange', 0, { expires: 1 });
+            currentNumber = 0; //we'r setting currentNumber to 0
+          }
+          console.log(currentNumber);
+          $('#display').html('Sentence of the day:<br>'+sentences[currentNumber]); //display giveing me div (which is up there^^^) html fills that what is between div
+          var dontchange = $.cookie('dontchange'); //load dontchange from cookie
+          if (!dontchange) {
+            currentNumber++; //we are increase currentNumber
+            $.cookie('dontchange', 0, { expires: 1 });
+            $.cookie('currentNumber', currentNumber, { expires: 10000 });
+          }
+          });
+      </script>
+    </body>
+  </html>
